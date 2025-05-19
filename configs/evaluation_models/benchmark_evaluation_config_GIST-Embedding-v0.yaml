@@ -1,0 +1,5 @@
+---
+model_path: "avsolatorio/GIST-Embedding-v0"
+model_type: "default" 
+use_prompt: False
+batch_size: 256

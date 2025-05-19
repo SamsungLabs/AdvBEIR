@@ -1,0 +1,7 @@
+---
+model_path: "Alibaba-NLP/gte-Qwen2-7B-instruct"
+model_type: "default"
+instruct_prefix: "Instruct: "
+use_prompt: True
+query_prefix: "\nQuery: "
+batch_size: 16

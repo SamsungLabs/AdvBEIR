@@ -1,0 +1,17 @@
+---
+benchmark_path: "data/perturbed_beir_datasets/scifact/perturbed_scifact.json"
+model_path: "intfloat/e5-small"
+use_prompt: False
+query_prefix: "query: "
+passage_prefix: "passage: "
+batch_size: 64
+use_cache: False
+
+# Benchmark path - path to the json file with added perturbations to the queries. The file should consist of:
+#       - query_id: ID of the query taken from the original BEIR dataset, do not assign query IDs by yourself
+#       - query: Original query text taken from the original BEIR dataset,
+#       - perturbed_query: Perturbed query text (with your methods applied).
+#       - method: a perturbation method that is applied to the given query
+#       - dataset: origin of specific query, names should be the same as in BENCHMARK_DATASETS 
+#                  from constants.py, except cqadupstack, which also has the domain suffix
+#       - metadata: Python dictionary, can contain multiple fields, but 'perturbation_strength' is necessary

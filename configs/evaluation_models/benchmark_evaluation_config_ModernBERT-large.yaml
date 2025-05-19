@@ -1,0 +1,5 @@
+---
+model_path: "answerdotai/ModernBERT-large"
+model_type: "default"
+use_prompt: False
+batch_size: 256

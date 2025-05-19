@@ -1,0 +1,141 @@
+save_dir: "../data"  # directory where the final benchmark file will be saved
+
+perturbation_methods:
+    # Character level
+    - characters_capitalization
+    - characters_keyboard_insert
+    - characters_keyboard_replace
+    - characters_neighbour_swap
+    - characters_ocr_error
+    - characters_punctuation
+    - characters_random_delete
+    - characters_random_insert
+    - characters_random_replace
+    - characters_shift_key_miss 
+    # Word level
+    - words_clare
+    - words_duplication
+    - words_joining
+    - words_lemmatization
+    - words_position_swap
+    - words_stemming
+    # Sentence level
+    - sentences_backtranslation
+    - sentences_parahprase
+
+
+# ---------- Character level ----------
+characters_capitalization:
+    perturbation_strength: 0.5
+
+characters_keyboard_insert:
+    perturbation_strength: 0.05
+
+characters_keyboard_replace:
+    replacement_map_fpath: "../configs/keyboard_neighbours_en.json"
+    perturbation_strength: 0.05
+    case_sensitive: true
+
+characters_neighbour_swap:
+    perturbation_strength: 0.05
+
+characters_ocr_error:
+    replacement_map_fpath: "../configs/ocr_errors_replacement_map.json"
+    perturbation_strength: 0.05
+    case_sensitive: true
+
+characters_punctuation:
+    perturbation_strength: 0.4
+    modify_weight: 4
+    insert_weight: 1
+
+characters_random_delete:
+    perturbation_strength: 0.05
+
+characters_random_insert:
+    perturbation_strength: 0.05
+
+characters_random_replace:
+    perturbation_strength: 0.05
+
+characters_shift_key_miss:
+    replacement_map_fpath: "../configs/gboard_missed_shift_replacement_map.json"
+    perturbation_strength: 0.05
+    case_sensitive: false
+
+# ---------- Word level ----------
+words_clare:
+    perturbation_strength: 0.1
+    spacy_model: "en_core_web_sm"
+    mlm_model: "answerdotai/ModernBERT-large"
+    st_encoder: "all-MiniLM-L6-v2"
+    top_p: 0.005
+    top_k: 5
+    min_sim_score: 0.75
+
+words_duplication:
+    perturbation_strength: 0.1
+    permitted_negation_distance: 2
+
+words_joining:
+    perturbation_strength: 0.3
+
+words_lemmatization:
+    language: "english"
+    perturbation_strength: 1.0
+
+words_position_swap:
+    perturbation_strength: 0.1
+
+words_stemming:
+    language: "english"
+    perturbation_strength: 1.0
+
+# ---------- Sentence level ----------
+sentences_backtranslation:
+    model_name: "haoranxu/X-ALMA-13B-Group"
+    batch_size: 1
+    inter_language: ko
+    source_language: en
+    max_new_tokens: 1200
+    num_beams: 5
+    temperature: 0.6
+    top_p: 0.9
+
+sentences_paraphrase:
+    hf_llm_path: "Qwen/Qwen2.5-7B-Instruct"
+    generation_params:
+        batch_size: 64
+        max_new_tokens: 1024
+        do_sample: true
+        temperature: 0.9
+        top_p: 0.9
+
+    prompt:
+        prompt_base: |
+            You are a helpful, well educated assistant whose role is to generate a paraphrase of the supplied text.
+            Output only the paraphrase, without any additional text. Do not insert additional knowledge. 
+            Keep the style and length of the text. Make sure to alter the original text.
+
+        question_prompt: "Your output should be in the form of a question."
+        search_query_prompt: "Your output should be in the form of a short search query."
+        argument_prompt: "Your output should be in the form of an argument."
+        article_title_prompt: "Your output should be in the form of an article title."
+        claim_prompt: "Your output should be in the form of a claim."
+        
+        prompt_types:
+            msmarco: ${..search_query_prompt}
+            trec-covid: ${..search_query_prompt}
+            nfcorpus: ${..search_query_prompt}
+            nq: ${..search_query_prompt}
+            hotpotqa: ${..question_prompt}
+            fiqa: ${..search_query_prompt}
+            arguana: ${..argument_prompt}
+            webis-touche2020: ${..question_prompt}
+            cqadupstack: ${..search_query_prompt}
+            quora: ${..question_prompt}
+            dbpedia-entity: ${..search_query_prompt}
+            scidocs: ${..article_title_prompt}
+            fever: ${..claim_prompt}
+            climate-fever: ${..claim_prompt}
+            scifact: ${..claim_prompt}

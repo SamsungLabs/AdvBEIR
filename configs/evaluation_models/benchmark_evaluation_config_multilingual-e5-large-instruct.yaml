@@ -1,0 +1,7 @@
+---
+model_path: "intfloat/multilingual-e5-large-instruct"
+model_type: "default"
+instruct_prefix: "Instruct: "
+use_prompt: True
+query_prefix: "\nQuery: "
+batch_size: 64

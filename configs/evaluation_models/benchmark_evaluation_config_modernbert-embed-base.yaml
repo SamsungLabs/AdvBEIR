@@ -1,0 +1,7 @@
+---
+model_path: "nomic-ai/modernbert-embed-base"
+model_type: "default"
+use_prompt: False
+query_prefix: "search_query: "
+passage_prefix: "search_document: "
+batch_size: 256

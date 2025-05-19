@@ -1,0 +1,7 @@
+/data
+/activations
+/mlruns
+/src/mlruns
+**/__pycache__
+/notebooks
+/.cache

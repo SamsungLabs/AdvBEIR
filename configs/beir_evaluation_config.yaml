@@ -1,0 +1,8 @@
+---
+dataset_name: "scifact"
+model_path: "intfloat/e5-small"
+use_prompt: False
+query_prefix: "query: "
+passage_prefix: "passage: "
+batch_size: 64
+use_cache: False

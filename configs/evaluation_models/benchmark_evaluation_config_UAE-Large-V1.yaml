@@ -1,0 +1,6 @@
+---
+model_path: "WhereIsAI/UAE-Large-V1"
+model_type: "default"
+use_prompt: False
+query_prefix: "Represent this sentence for searching relevant passages: "
+batch_size: 256
